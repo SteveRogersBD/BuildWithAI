@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.media.MediaRecorder;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
+import android.speech.tts.TextToSpeech;
 import android.view.View;
 
 import androidx.annotation.Nullable;
@@ -16,8 +17,9 @@ import com.example.buildwithai.models.ChatModel;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
-public class ConversationActivity extends AppCompatActivity {
+public class ConversationActivity extends AppCompatActivity implements TextToSpeech.OnInitListener{
 
     List<ChatModel> messageList;
     ChatAdapter chatAdapter;
@@ -25,6 +27,7 @@ public class ConversationActivity extends AppCompatActivity {
     GeminiHelper gm;
     private MediaRecorder mediaRecorder;
     private String audioFilePath;
+    TextToSpeech tts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,12 +39,13 @@ public class ConversationActivity extends AppCompatActivity {
         chatAdapter = new ChatAdapter(ConversationActivity.this, messageList);
         binding.mainRecycler.setAdapter(chatAdapter);
         binding.mainRecycler.setLayoutManager(new LinearLayoutManager(ConversationActivity.this));
-
+        tts = new TextToSpeech(this,this);
         binding.sendBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (!binding.textEt.getText().toString().equals("")) {
                     String query = binding.textEt.getText().toString();
+                    //speakText(query);
                     ChatModel newMessage = new ChatModel(query, ChatModel.SENT_BY_ME);
                     messageList.add(newMessage);
                     chatAdapter.notifyDataSetChanged();
@@ -52,6 +56,7 @@ public class ConversationActivity extends AppCompatActivity {
                     gm.callGemini(filtered(query), new GeminiHelper.GeminiCallback() {
                         @Override
                         public void onSuccess(String result) {
+                            speakText(result);
                             String modResult = "Translation: " + result;
                             ChatModel trans = new ChatModel(modResult, ChatModel.SENT_BY_ME);
 
@@ -105,6 +110,7 @@ public class ConversationActivity extends AppCompatActivity {
             gm.callGemini(filtered(message), new GeminiHelper.GeminiCallback() {
                 @Override
                 public void onSuccess(String result) {
+                    speakText(result);
                     String modResult = "Translation: " + result;
                     ChatModel trans = new ChatModel(modResult, ChatModel.SENT_BY_BOT);
 
@@ -129,5 +135,34 @@ public class ConversationActivity extends AppCompatActivity {
 
 
         }
+    }
+
+    @Override
+    public void onInit(int status) {
+        if (status == TextToSpeech.SUCCESS) {
+            // Set language to English
+            int langResult = tts.setLanguage(Locale.US);
+            if (langResult == TextToSpeech.LANG_MISSING_DATA || langResult == TextToSpeech.LANG_NOT_SUPPORTED) {
+                // Handle the error if the language is not supported or data is missing
+            }
+        } else {
+            // Handle the initialization failure (e.g., the TTS engine failed to initialize)
+        }
+    }
+    private void speakText(String text) {
+        // Check if TTS is initialized
+        if (tts != null) {
+            tts.speak(text, TextToSpeech.QUEUE_FLUSH, null, null);
+        }
+    }
+
+    // Release TTS resources when done
+    @Override
+    protected void onDestroy() {
+        if (tts != null) {
+            tts.stop();
+            tts.shutdown();
+        }
+        super.onDestroy();
     }
 }

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "503310120491",
+    "project_id": "buildwithai-7e108",
+    "storage_bucket": "buildwithai-7e108.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:503310120491:android:90ae96aa78c7c393f15c6e",
+        "android_client_info": {
+          "package_name": "com.example.buildwithai"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAePsmLNL7I3VDF1byprRh380PfHfcMvOc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
