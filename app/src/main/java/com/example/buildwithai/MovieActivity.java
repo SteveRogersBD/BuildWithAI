@@ -14,13 +14,13 @@ import java.util.ArrayList;
 public class MovieActivity extends AppCompatActivity {
 
     ActivityMovieBinding binding;
-
+    GeminiHelper gm;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityMovieBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
+        gm = new GeminiHelper();
         // Start button click listener
         binding.startBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -32,6 +32,38 @@ public class MovieActivity extends AppCompatActivity {
                 startActivityForResult(intent, 200); // Start activity for speech recognition
             }
         });
+
+        binding.aiBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                binding.pdSum.setVisibility(View.VISIBLE);
+                String sub = binding.subTv.getText().toString();
+                if(!(sub.equals("") || sub==null)) gm.callGemini(getPrompt(sub), new GeminiHelper.GeminiCallback() {
+                    @Override
+                    public void onSuccess(String result) {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                binding.pdSum.setVisibility(View.INVISIBLE);
+                                binding.resultTv.setText(result);
+                                binding.resultTv.setVisibility(View.VISIBLE);
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void onFailure(Throwable t) {
+                        binding.pdSum.setVisibility(View.INVISIBLE);
+                        binding.resultTv.setError("Sorry there was an error. Try again please.");
+                    }
+                });
+            }
+        });
+    }
+
+    private String getPrompt(String sub) {
+        sub = sub.concat("Summarize this text.");
+        return sub;
     }
 
     // Handle speech recognition result

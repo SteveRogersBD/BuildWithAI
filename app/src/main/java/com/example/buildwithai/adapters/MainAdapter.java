@@ -53,11 +53,11 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder>{
                 {
                     context.startActivity(new Intent(context, ConversationActivity.class));
                 }
-                else if(position == 1)
+                else if(position == 2)
                 {
                     context.startActivity(new Intent(context, VideoActivity.class));
                 }
-                else if(position == 2)
+                else if(position == 1)
                 {
                     context.startActivity(new Intent(context, MovieActivity.class));
                 }

@@ -18,6 +18,32 @@ public class VideoActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         gm = new GeminiHelper();
 
+        binding.summarize.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                binding.pdSummary.setVisibility(View.VISIBLE);
+                String script = binding.transcript.getText().toString();
+                script = script.concat("summarize this text");
+                gm.callGemini(script, new GeminiHelper.GeminiCallback() {
+                    @Override
+                    public void onSuccess(String result) {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                binding.pdSummary.setVisibility(View.INVISIBLE);
+                                binding.resSummary.setVisibility(View.VISIBLE);
+                                binding.resSummary.setText(result);
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void onFailure(Throwable t) {
+
+                    }
+                });
+            }
+        });
         binding.generateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -60,4 +86,5 @@ public class VideoActivity extends AppCompatActivity {
     private String filtered(String query) {return "I am building an app for people with hearing disabilities. I got this video link \"" + query + "\". " +
                 "Describe the entire content of the video.";
     }
+
 }

@@ -124,6 +124,7 @@ public class SignInActivity extends AppCompatActivity {
                 {
                     FirebaseUser user = task.getResult().getUser();
                     updateUI(user);
+                    startActivity(new Intent(SignInActivity.this,MainActivity.class));
                 }
             }
         });
