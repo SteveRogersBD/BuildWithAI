@@ -1,9 +1,8 @@
 
-# Project Title
+# BuildWithAI: Speechify
 
-A brief description of what this project does and who it's for
-BuildWithAI: Speechify
-Inspiration
+
+# Inspiration
 
 The inspiration behind this project comes from a close friend of mine who cannot hear or speak. I've seen firsthand how challenging it can be for them to communicate with others, especially in situations where sign language isn't understood. Their struggles inspired me to create a tool that could help bridge this communication gap and make their life easier. I wanted to use technology to empower them and others like them, ensuring they can interact with the world more confidently and inclusively.
 What It Does
@@ -39,7 +38,9 @@ What We Learned
 What's Next for Speechify
 
 We plan to integrate an AI model capable of translating sign language into human language in real time and vice versa, enhancing accessibility further. Continued use of the Gemini API for content summarization and translation will also be expanded.
-Technologies Used
+
+
+# Technologies Used
 
     Programming Languages: Java, Kotlin
     Development Tools: Android Studio, Gradle (build tool)
