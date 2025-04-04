@@ -46,3 +46,7 @@ We plan to integrate an AI model capable of translating sign language into human
     Development Tools: Android Studio, Gradle (build tool)
     APIs: Android Text-to-Speech API, Gemini API
     Database: Firebase (authentication and real-time database)
+
+## **Watch the following video to understand it better.**  
+
+[![Watch the Video](https://img.youtube.com/vi/UznGzx5qtyE/0.jpg)](https://youtu.be/dWoCCekeOmk?si=0KEFnyoejp0tJTf8)
