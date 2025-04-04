@@ -49,4 +49,4 @@ We plan to integrate an AI model capable of translating sign language into human
 
 ## **Watch the following video to understand it better.**  
 
-[![Watch the Video](https://img.youtube.com/vi/dWoCCekeOmk?si=0KEFnyoejp0tJTf8/0.jpg)](https://youtu.be/dWoCCekeOmk?si=0KEFnyoejp0tJTf8)
+[![Watch the Video]([https://img.youtube.com/vi/dWoCCekeOmk?si=0KEFnyoejp0tJTf8/0.jpg](https://github.com/SteveRogersBD/BuildWithAI/blob/0da7ece105704617a95d37ab6463ce1356607f07/WhatsApp%20Image%202024-11-18%20at%2005.11.26.jpeg))](https://youtu.be/dWoCCekeOmk?si=0KEFnyoejp0tJTf8)
